@@ -2,9 +2,6 @@ package com.youth.banner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,19 +18,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.rd.PageIndicatorView;
+import com.rd.animation.type.AnimationType;
 import com.youth.banner.listener.OnBannerClickListener;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoaderInterface;
 import com.youth.banner.view.BannerViewPager;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
-import static android.support.v4.view.ViewPager.PageTransformer;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-public class Banner extends FrameLayout implements OnPageChangeListener {
+
+public class Banner extends FrameLayout implements ViewPager.OnPageChangeListener {
     public String tag = "banner";
     private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
     private int mIndicatorWidth;
@@ -68,11 +69,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private ImageView bannerDefaultImage;
     private ImageLoaderInterface imageLoader;
     private BannerPagerAdapter adapter;
-    private OnPageChangeListener mOnPageChangeListener;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
     private BannerScroller mScroller;
     private OnBannerClickListener bannerListener;
     private OnBannerListener listener;
     private DisplayMetrics dm;
+    private PageIndicatorView mPageIndicatorView;
 
     private WeakHandler handler = new WeakHandler();
 
@@ -108,6 +110,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         bannerTitle = (TextView) view.findViewById(R.id.bannerTitle);
         numIndicator = (TextView) view.findViewById(R.id.numIndicator);
         numIndicatorInside = (TextView) view.findViewById(R.id.numIndicatorInside);
+        mPageIndicatorView = view.findViewById(R.id.pageIndicatorView);
         bannerDefaultImage.setImageResource(bannerBackgroundImage);
         initViewPagerScroll();
     }
@@ -136,6 +139,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void initViewPagerScroll() {
+        viewPager.setClipToPadding(false);
+        int paddingLeft,paddingRight ;
+        paddingLeft = paddingRight = (int) (16 * dm.density);
+        int margin = paddingLeft / 2;
+        viewPager.setPadding(paddingLeft, 0, paddingRight, 0);
+        viewPager.setPageMargin(margin);
         try {
             Field mField = ViewPager.class.getDeclaredField("mScroller");
             mField.setAccessible(true);
@@ -178,7 +187,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public Banner setBannerAnimation(Class<? extends PageTransformer> transformer) {
+    public Banner setBannerAnimation(Class<? extends ViewPager.PageTransformer> transformer) {
         try {
             setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
@@ -203,7 +212,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     /**
-     * Set a {@link PageTransformer} that will be called for each attached page whenever
+     * Set a {@link ViewPager.PageTransformer} that will be called for each attached page whenever
      * the scroll position is changed. This allows the application to apply custom property
      * transformations to each page, overriding the default sliding look and feel.
      *
@@ -212,7 +221,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      * @param transformer         PageTransformer that will modify each page's animation properties
      * @return Banner
      */
-    public Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
+    public Banner setPageTransformer(boolean reverseDrawingOrder, ViewPager.PageTransformer transformer) {
         viewPager.setPageTransformer(reverseDrawingOrder, transformer);
         return this;
     }
@@ -419,6 +428,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             else if (bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 indicatorInside.addView(imageView, params);
         }
+        mPageIndicatorView.setCount(count);
+        mPageIndicatorView.setSelection(0);
+        mPageIndicatorView.setAnimationType(AnimationType.SLIDE);
+        mPageIndicatorView.setInteractiveAnimation(true);
     }
 
 
@@ -576,6 +589,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     @Override
     public void onPageSelected(int position) {
+        if(position > 0 && position <= count) {
+            mPageIndicatorView.setSelection(position-1);
+        }
         currentItem=position;
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
@@ -589,6 +605,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
         if (position == 0) position = count;
         if (position > count) position = 1;
+
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:
                 break;
@@ -626,7 +643,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         mOnPageChangeListener = onPageChangeListener;
     }
 

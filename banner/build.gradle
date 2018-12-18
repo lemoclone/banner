@@ -4,12 +4,11 @@ apply plugin: 'com.jfrog.bintray'
 version = "1.4.10"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 25
+        minSdkVersion 16
+        targetSdkVersion 27
         versionCode 41
         versionName version
     }
@@ -25,8 +24,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:support-v4:+'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc01'
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
+    implementation 'com.github.lemoclone:PageIndicatorView:1.0.6'
 }
 
 

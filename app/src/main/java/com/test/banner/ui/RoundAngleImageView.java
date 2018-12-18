@@ -2,7 +2,6 @@ package com.test.banner.ui;
 
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,15 +11,18 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 
 public class RoundAngleImageView extends ImageView {
 
     private Paint paint;
-    private int roundWidth = 5;
-    private int roundHeight = 5;
+    private int roundWidth = 12;
+    private int roundHeight = 12;
     private Paint paint2;
+    private DisplayMetrics dm;
+
 
     public RoundAngleImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -44,6 +46,9 @@ public class RoundAngleImageView extends ImageView {
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
         paint2 = new Paint();
         paint2.setXfermode(null);
+        dm = context.getResources().getDisplayMetrics();
+        roundHeight = (int) (5 * dm.density);
+        roundWidth = (int) (5 * dm.density);
     }
 
     @Override

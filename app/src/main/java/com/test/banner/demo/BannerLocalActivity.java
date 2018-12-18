@@ -1,15 +1,15 @@
 package com.test.banner.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import com.test.banner.App;
 import com.test.banner.R;
 import com.test.banner.loader.GlideImageLoader;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BannerLocalActivity extends AppCompatActivity {
 

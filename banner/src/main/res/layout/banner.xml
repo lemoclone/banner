@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:id="@id/bannerContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:clipChildren="false">
 
     <com.youth.banner.view.BannerViewPager
         android:id="@id/bannerViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:clipChildren="false" />
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/pageIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        app:piv_animationType="drop"
+        app:piv_dynamicCount="true"
+        app:piv_interactiveAnimation="true"
+        app:piv_selectedColor="#ff0000"
+        app:piv_unselectedColor="#00ff00"
+        attrs:piv_padding="10dp"
+        attrs:piv_radius="4dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:visibility="gone"
+        android:layout_height="24dp">
 
         <LinearLayout
             android:id="@id/circleIndicator"
@@ -92,4 +110,4 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:visibility="gone"/>
-</RelativeLayout>
+</LinearLayout>
