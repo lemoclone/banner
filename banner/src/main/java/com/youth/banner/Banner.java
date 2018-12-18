@@ -26,7 +26,6 @@ import com.youth.banner.loader.ImageLoaderInterface;
 import com.youth.banner.view.BannerViewPager;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -589,9 +588,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
 
     @Override
     public void onPageSelected(int position) {
-        if(position > 0 && position <= count) {
-            mPageIndicatorView.setSelection(position-1);
-        }
         currentItem=position;
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
@@ -605,6 +601,8 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         }
         if (position == 0) position = count;
         if (position > count) position = 1;
+
+        mPageIndicatorView.setSelection(position-1);
 
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:
