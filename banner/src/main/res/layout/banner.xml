@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:attrs="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     android:id="@id/bannerContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,14 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        app:piv_animationType="drop"
-        app:piv_dynamicCount="true"
-        app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="#ff0000"
-        app:piv_unselectedColor="#00ff00"
-        attrs:piv_padding="10dp"
-        attrs:piv_radius="4dp" />
+        android:layout_marginTop="8dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
