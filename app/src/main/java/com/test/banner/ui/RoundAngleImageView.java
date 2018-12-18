@@ -12,10 +12,11 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 
-public class RoundAngleImageView extends ImageView {
+public class RoundAngleImageView extends AppCompatImageView {
 
     private Paint paint;
     private int roundWidth = 12;
