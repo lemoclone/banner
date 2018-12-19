@@ -242,6 +242,10 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
 
     public Banner setImages(List<?> imageUrls) {
         this.imageUrls = imageUrls;
+        if(imageUrls.size() == 1) {
+            viewPager.setClipToPadding(false);
+            viewPager.setPadding(0, 0, 0, 0);
+        }
         this.count = imageUrls.size();
         return this;
     }
