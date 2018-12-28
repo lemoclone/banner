@@ -15,22 +15,14 @@
             android:id="@id/bannerViewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8"
+            android:layout_weight="1"
             android:clipChildren="false" />
 
         <com.rd.PageIndicatorView
             android:id="@+id/pageIndicatorView"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_below="@+id/bannerViewPager" />
+            android:layout_height="24dp"
+            android:padding="4dp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/bannerDefaultImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:visibility="gone"/>
 </FrameLayout>

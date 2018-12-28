@@ -31,18 +31,18 @@ public class IndicatorPositionActivity extends AppCompatActivity implements Adap
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
-            case 0:
-                banner.setIndicatorGravity(BannerConfig.LEFT);
-                break;
-            case 1:
-                banner.setIndicatorGravity(BannerConfig.CENTER);
-                break;
-            case 2:
-                banner.setIndicatorGravity(BannerConfig.RIGHT);
-                break;
-        }
-        banner.start();
+//        switch (position) {
+//            case 0:
+//                banner.setIndicatorGravity(BannerConfig.LEFT);
+//                break;
+//            case 1:
+//                banner.setIndicatorGravity(BannerConfig.CENTER);
+//                break;
+//            case 2:
+//                banner.setIndicatorGravity(BannerConfig.RIGHT);
+//                break;
+//        }
+//        banner.start();
     }
 
     @Override

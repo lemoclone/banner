@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.test.banner.R;
 import com.test.banner.ui.RoundAngleImageView;
 import com.youth.banner.loader.ImageLoader;
 
@@ -11,7 +12,7 @@ import com.youth.banner.loader.ImageLoader;
 public class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        Glide.with(context.getApplicationContext()).load(path).into(imageView);
+        Glide.with(context.getApplicationContext()).load(path).placeholder(R.drawable.green).into(imageView);
     }
 
     @Override

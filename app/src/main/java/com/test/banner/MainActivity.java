@@ -53,11 +53,33 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         String[] data = getResources().getStringArray(R.array.demo_list);
         banner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 400));
 
-        //简单使用
-        banner.setImages(App.images)
+
+        List<String> list = new ArrayList<>();
+        list.add("");
+
+        banner.setImages(list)
                 .setImageLoader(new GlideImageLoader())
                 .setOnBannerListener(this)
                 .start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        banner.setImages(App.images)
+                                .setImageLoader(new GlideImageLoader())
+                                .start();
+                    }
+                });
+            }
+        }).start();
 
     }
 
