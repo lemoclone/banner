@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_main);
         banner = (Banner) findViewById(R.id.banner);
         String[] data = getResources().getStringArray(R.array.demo_list);
-        banner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 200));
+        banner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 400));
 
         //简单使用
         banner.setImages(App.images)

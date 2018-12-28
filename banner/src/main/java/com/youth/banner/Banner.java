@@ -55,7 +55,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private List<ImageView> indicatorImages;
     private Context context;
     private BannerViewPager viewPager;
-    private ImageView bannerDefaultImage;
     private ImageLoaderInterface imageLoader;
     private BannerPagerAdapter adapter;
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
@@ -90,10 +89,8 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         imageViews.clear();
         handleTypedArray(context, attrs);
         View view = LayoutInflater.from(context).inflate(mLayoutResId, this, true);
-        bannerDefaultImage = view.findViewById(R.id.bannerDefaultImage);
         viewPager = view.findViewById(R.id.bannerViewPager);
         mPageIndicatorView = view.findViewById(R.id.pageIndicatorView);
-        bannerDefaultImage.setImageResource(bannerBackgroundImage);
         initViewPagerScroll();
     }
 
@@ -289,13 +286,15 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     private void setImageList(List<?> imagesUrl) {
+        initImages();
+
         if (imagesUrl == null || imagesUrl.size() <= 0) {
-            bannerDefaultImage.setVisibility(VISIBLE);
-            Log.e(tag, "The image data set is empty.");
+            ImageView imageView = new ImageView(context);
+            imageView.setImageResource(bannerBackgroundImage);
+            imageViews.add(imageView);
             return;
         }
 
-        initImages();
         for (int i = 0; i <= count + 1; i++) {
             View imageView = null;
             if (imageLoader != null) {
