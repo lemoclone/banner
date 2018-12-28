@@ -32,7 +32,7 @@ public class App extends Application {
         String[] urls = getResources().getStringArray(R.array.url);
         String[] tips = getResources().getStringArray(R.array.title);
         List list = Arrays.asList(urls);
-        images = new ArrayList(list.subList(0,1));
+        //images = list;
         List list1 = Arrays.asList(tips);
         titles= new ArrayList(list1);
     }

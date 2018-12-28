@@ -1,17 +1,27 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_marginTop="52dp"
+    android:isScrollContainer="false">
 
-    <com.test.banner.SuperSwipeRefreshLayout
-        android:id="@+id/swipe"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/list"
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"/>
-    </com.test.banner.SuperSwipeRefreshLayout>
-</LinearLayout>
+            android:layout_height="200dp"
+            android:clipToPadding="false"
+            app:banner_default_image="@drawable/background"
+            app:image_scale_type="fit_xy"
+            app:delay_time="4000"
+            app:is_auto_play="true" />
+
+    </LinearLayout>
+
+
+</ScrollView>

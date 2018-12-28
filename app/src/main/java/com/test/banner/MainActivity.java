@@ -3,12 +3,10 @@ package com.test.banner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.test.banner.demo.BannerAnimationActivity;
@@ -31,8 +29,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, OnBannerListener {
     static final int REFRESH_COMPLETE = 0X1112;
-    SuperSwipeRefreshLayout mSwipeLayout;
-    ListView listView;
+    //SuperSwipeRefreshLayout mSwipeLayout;
+    //ListView listView;
     Banner banner;
 
     private Handler mHandler = new Handler() {
@@ -43,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     List list = Arrays.asList(urls);
                     List arrayList = new ArrayList(list);
                     banner.update(arrayList);
-                    mSwipeLayout.setRefreshing(false);
                     break;
             }
         }
@@ -52,20 +49,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSwipeLayout = (SuperSwipeRefreshLayout) findViewById(R.id.swipe);
-        mSwipeLayout.setOnRefreshListener(this);
-        listView = (ListView) findViewById(R.id.list);
-        View header = LayoutInflater.from(this).inflate(R.layout.header, null);
-        banner = (Banner) header.findViewById(R.id.banner);
-        banner.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, App.H / 4));
-        listView.addHeaderView(banner);
-
+        banner = (Banner) findViewById(R.id.banner);
         String[] data = getResources().getStringArray(R.array.demo_list);
-        listView.setAdapter(new SampleAdapter(this,data));
-        listView.setOnItemClickListener(this);
+        banner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 200));
 
         //简单使用
-        banner.setImages(App.images.subList(0,1))
+        banner.setImages(App.images)
                 .setImageLoader(new GlideImageLoader())
                 .setOnBannerListener(this)
                 .start();

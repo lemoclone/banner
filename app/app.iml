@@ -103,7 +103,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_split_apk_resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javac" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint_jar" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifest-checker" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_manifests" />
@@ -126,6 +125,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime-2.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator-1.0.0-rc01" level="project" />
+    <orderEntry type="library" name="Gradle: com.makeramen:roundedimageview-2.3.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.fragment:fragment-1.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat-1.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.print:print-1.0.0-rc01" level="project" />
