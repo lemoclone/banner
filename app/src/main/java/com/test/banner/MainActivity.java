@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        banner.setImages(App.images)
+                        banner.setImages(App.images.subList(0,1))
                                 .setImageLoader(new GlideImageLoader())
                                 .start();
                     }
@@ -89,21 +89,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
 
-    //如果你需要考虑更好的体验，可以这么操作
     @Override
     protected void onStart() {
         super.onStart();
-        //开始轮播
         banner.startAutoPlay();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //结束轮播
         banner.stopAutoPlay();
     }
-
 
     @Override
     public void onRefresh() {

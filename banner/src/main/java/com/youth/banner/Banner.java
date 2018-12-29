@@ -295,12 +295,14 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     private void createIndicator() {
-        if (count > 0) {
+        if (count > 1) {
             mPageIndicatorView.setVisibility(VISIBLE);
             mPageIndicatorView.setCount(count);
             mPageIndicatorView.setSelection(0);
             mPageIndicatorView.setAnimationType(AnimationType.SLIDE);
             mPageIndicatorView.setInteractiveAnimation(true);
+        } else {
+            mPageIndicatorView.setVisibility(INVISIBLE);
         }
     }
 
@@ -338,7 +340,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         public void run() {
             if (count > 1 && isAutoPlay) {
                 currentItem = currentItem % (count + 1) + 1;
-                Log.i(tag, "curr:" + currentItem + " count:" + count);
                 if (currentItem == 1) {
                     viewPager.setCurrentItem(currentItem, false);
                     handler.post(task);
@@ -352,7 +353,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-//        Log.i(tag, ev.getAction() + "--" + isAutoPlay);
         if (isAutoPlay) {
             int action = ev.getAction();
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
@@ -365,12 +365,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         return super.dispatchTouchEvent(ev);
     }
 
-    /**
-     * 返回真实的位置
-     *
-     * @param position
-     * @return 下标从0开始
-     */
     public int toRealPosition(int position) {
         int realPosition = (position - 1) % count;
         if (realPosition < 0)
@@ -417,7 +411,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageScrollStateChanged(state);
         }
-//        Log.i(tag,"currentItem: "+currentItem);
         switch (state) {
             case 0://No operation
                 if (currentItem == 0) {
