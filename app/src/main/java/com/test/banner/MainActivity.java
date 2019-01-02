@@ -1,12 +1,11 @@
 package com.test.banner;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.test.banner.demo.BannerAnimationActivity;
@@ -23,11 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, OnBannerListener {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener, OnBannerListener {
     static final int REFRESH_COMPLETE = 0X1112;
     //SuperSwipeRefreshLayout mSwipeLayout;
     //ListView listView;
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_main);
         banner = (Banner) findViewById(R.id.banner);
         String[] data = getResources().getStringArray(R.array.demo_list);
-        banner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 400));
+        //banner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 400));
 
 
         List<String> list = new ArrayList<>();
@@ -73,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        banner.setImages(App.images.subList(0,1))
+                        banner.setImages(App.images.subList(0,4))
                                 .setImageLoader(new GlideImageLoader())
                                 .start();
                     }
@@ -99,11 +95,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onStop() {
         super.onStop();
         banner.stopAutoPlay();
-    }
-
-    @Override
-    public void onRefresh() {
-        mHandler.sendEmptyMessageDelayed(REFRESH_COMPLETE, 2000);
     }
 
     @Override

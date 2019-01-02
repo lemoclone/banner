@@ -93,12 +93,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     private void initViewPagerScroll() {
-        viewPager.setClipToPadding(false);
-        int paddingLeft, paddingRight;
-        paddingLeft = paddingRight = (int) (16 * dm.density);
-        int margin = paddingLeft / 2;
-        viewPager.setPadding(paddingLeft, 0, paddingRight, 0);
-        viewPager.setPageMargin(margin);
         try {
             Field mField = ViewPager.class.getDeclaredField("mScroller");
             mField.setAccessible(true);
@@ -108,6 +102,15 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         } catch (Exception e) {
             Log.e(tag, e.getMessage());
         }
+    }
+
+    private void initPageMargin() {
+        viewPager.setClipToPadding(false);
+        int paddingLeft, paddingRight;
+        paddingLeft = paddingRight = (int) (16 * dm.density);
+        int margin = paddingLeft / 2;
+        viewPager.setPadding(paddingLeft, 0, paddingRight, 0);
+        viewPager.setPageMargin(margin);
     }
 
 
@@ -180,6 +183,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     public Banner setImages(List<?> imageUrls) {
+        initPageMargin();
         this.imageUrls = imageUrls;
         if (imageUrls.size() == 1) {
             int paddingLeft = (int) (16 * dm.density);
@@ -341,7 +345,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             if (count > 1 && isAutoPlay) {
                 currentItem = currentItem % (count + 1) + 1;
                 if (currentItem == 1) {
-                    viewPager.setCurrentItem(currentItem, false);
+                    viewPager.setCurrentItem(currentItem, true);
                     handler.post(task);
                 } else {
                     viewPager.setCurrentItem(currentItem);
