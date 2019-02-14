@@ -49,6 +49,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private OnBannerListener listener;
     private DisplayMetrics dm;
     private PageIndicatorView mPageIndicatorView;
+    private boolean isIndicatorShow = BannerConfig.INDICATOR_SHOW;
 
     private WeakHandler handler = new WeakHandler();
 
@@ -76,6 +77,9 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         View view = LayoutInflater.from(context).inflate(mLayoutResId, this, true);
         viewPager = view.findViewById(R.id.bannerViewPager);
         mPageIndicatorView = view.findViewById(R.id.pageIndicatorView);
+        if (!isIndicatorShow) {
+            mPageIndicatorView.setVisibility(GONE);
+        }
         initViewPagerScroll();
     }
 
@@ -89,6 +93,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         scrollTime = typedArray.getInt(R.styleable.Banner_scroll_time, BannerConfig.DURATION);
         isAutoPlay = typedArray.getBoolean(R.styleable.Banner_is_auto_play, BannerConfig.IS_AUTO_PLAY);
         mLayoutResId = typedArray.getResourceId(R.styleable.Banner_banner_layout, mLayoutResId);
+        isIndicatorShow = typedArray.getBoolean(R.styleable.Banner_is_indicator_show, BannerConfig.INDICATOR_SHOW);
         typedArray.recycle();
     }
 
@@ -299,10 +304,13 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     private void createIndicator() {
+        if (!isIndicatorShow) {
+            return;
+        }
         if (count > 1) {
             mPageIndicatorView.setVisibility(VISIBLE);
             mPageIndicatorView.setCount(count);
-            mPageIndicatorView.setSelection(0);
+            updatePageIndicator(0);
             mPageIndicatorView.setAnimationType(AnimationType.SLIDE);
             mPageIndicatorView.setInteractiveAnimation(true);
         } else {
@@ -450,8 +458,14 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         }
         if (position == 0) position = count;
         if (position > count) position = 1;
+        updatePageIndicator(position - 1);
+    }
 
-        mPageIndicatorView.setSelection(position - 1);
+    private void updatePageIndicator(int position) {
+        if (!isIndicatorShow) {
+            return;
+        }
+        mPageIndicatorView.setSelection(position);
     }
 
     /**

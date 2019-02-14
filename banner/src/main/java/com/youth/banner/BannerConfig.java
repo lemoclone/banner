@@ -35,4 +35,7 @@ public class BannerConfig {
     public static final int TITLE_TEXT_COLOR = -1;
     public static final int TITLE_TEXT_SIZE = -1;
 
+
+    public static final boolean INDICATOR_SHOW = true;
+
 }

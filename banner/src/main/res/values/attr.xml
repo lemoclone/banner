@@ -28,5 +28,6 @@
         </attr>
         <!--<attr name="indicator_animator" format="reference" />-->
         <!--<attr name="indicator_animator_reverse" format="reference" />-->
+        <attr name="is_indicator_show" format="boolean" />
     </declare-styleable>
 </resources>
