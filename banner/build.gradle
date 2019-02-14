@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-version = "1.4.10"
+version = "1.4.11"
 
 group='com.github.lemoclone'
 
@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 41
+        versionCode 42
         versionName version
     }
     buildTypes {
