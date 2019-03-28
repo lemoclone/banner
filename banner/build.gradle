@@ -26,7 +26,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.github.lemoclone:PageIndicatorView:1.0.7'
+    implementation 'com.github.lemoclone:PageIndicatorView:1.0.8'
     implementation 'androidx.viewpager:viewpager:1.0.0'
 }
 
